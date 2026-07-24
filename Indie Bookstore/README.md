@@ -2,6 +2,10 @@
 
 A complete, responsive static landing page for a fictional independent bookstore, **Indie Bookstore**. Built with plain HTML5, CSS3, and vanilla JavaScript — no frameworks, no build tools, no external UI libraries.
 
+## Live Demo
+
+Deploy the project using  Netlify (https://indiebookstore.netlify.app).
+
 ## Project Overview
 
 Indie Bookstore is a single-page marketing site for an indie bookstore. It presents the store's featured titles, browsing categories, value proposition, customer testimonials, and a newsletter signup, wrapped in a sticky-navigation header and a full footer. Featured books are loaded asynchronously (simulated) to demonstrate real-world loading, empty, and populated states, and the newsletter form includes full client-side validation and input sanitization.
