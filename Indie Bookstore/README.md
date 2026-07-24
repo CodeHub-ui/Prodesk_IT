@@ -1,4 +1,4 @@
-#Indie Bookstore — Indie Bookstore Landing Page
+##Indie Bookstore — Indie Bookstore Landing Page
 
 A complete, responsive static landing page for a fictional independent bookstore, **Indie Bookstore**. Built with plain HTML5, CSS3, and vanilla JavaScript — no frameworks, no build tools, no external UI libraries.
 
