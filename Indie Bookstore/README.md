@@ -33,11 +33,11 @@ The visual design follows a modern, minimal, monochrome (black / white / gray) c
 
 ```
 Indie Bookstore/
-├── Scr             # To store images
-├── index.html      # Semantic work for all sections
-├── style.css        # Mobile-first, organized stylesheet  
-├── script.js        # Small, single-purpose functions grouped by feature
-└── README.md         # This file
+├── Scr             
+├── index.html       
+├── style.css         
+├── script.js         
+└── README.md          
 ```
 
 All three source files sit in the same folder and reference each other with relative paths (`style.css`, `script.js`), so the folder can be moved or renamed freely as long as the files stay together.
