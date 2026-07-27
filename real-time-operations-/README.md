@@ -113,12 +113,6 @@ The project uses **echo.websocket.events**, which is a public echo server. Messa
 
 ---
 
-## Screenshot
-
-(workflow.jpg)
-
----
-
 ## Author
 
 Harshit Gupta
