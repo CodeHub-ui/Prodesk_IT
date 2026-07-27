@@ -2,10 +2,8 @@
 
 A React-based real-time verification dashboard that simulates an operations room where field operators can review, approve, and reject verification tasks. The application uses WebSockets to receive live updates and automatically reflects task status changes without requiring a page refresh.
 
-## Reference
-
-**Ticket:** ENG-149206
-
+## Live Demo 
+https://realtimeoperation.netlify.app
 ---
 
 ## Features
@@ -27,10 +25,9 @@ A React-based real-time verification dashboard that simulates an operations room
 ## Tech Stack
 
 - React 18
-- Vite
 - WebSockets
 - Vanilla CSS
-- JavaScript (ES6)
+- JavaScript 
 
 ---
 
@@ -110,15 +107,6 @@ Reconnect sequence:
 
 ---
 
-## Accessibility
-
-- Semantic HTML elements
-- ARIA labels
-- Keyboard accessible controls
-- Visible focus indicators
-
----
-
 ## Notes
 
 The project uses **echo.websocket.events**, which is a public echo server. Messages are echoed back to the same client instead of being broadcast to multiple users. Replacing it with a broadcast-enabled WebSocket server would enable real-time synchronization across multiple clients without changing the application architecture.
@@ -127,7 +115,7 @@ The project uses **echo.websocket.events**, which is a public echo server. Messa
 
 ## Screenshot
 
-_Add a screenshot of the dashboard here._
+(workflow.jpg)
 
 ---
 
