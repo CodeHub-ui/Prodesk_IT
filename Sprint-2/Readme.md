@@ -100,6 +100,7 @@ Sprint-2/
 ├── index.html
 ├── style.css
 ├── script.js
+├── Readme.md
 └── images.png
 ```
 
