@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prodesk IT</title>
+
+  <script>
+    (function () {
+      var saved = localStorage.getItem('prodesk-theme');
+      var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="images.png" href="images.png">
+
+  <!-- Preconnect for font -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Karla:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!--  NAVBAR  -->
+  <header class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a href="#" class="navbar__logo" aria-label="Prodesk IT Home">
+        <img src="images.png" alt="Prodesk IT Logo" class="navbar__logo-img">
+        <span data-content="brand.name">Prodesk IT</span>
+      </a>
+
+      <nav class="navbar__nav" id="primary-nav">
+        <ul class="navbar__links">
+          <li><a href="#hero" class="navbar__link" data-content="nav.home">Home</a></li>
+          <li><a href="#features" class="navbar__link" data-content="nav.services">Services</a></li>
+          <li><a href="#about" class="navbar__link" data-content="nav.about">About</a></li>
+          <li><a href="#contact" class="navbar__link" data-content="nav.contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="navbar__actions">
+        <button 
+          class="navbar__theme-toggle" 
+          id="themeToggle" 
+          aria-label="Toggle dark mode" 
+          type="button">
+          <svg class="navbar__theme-icon navbar__theme-icon--sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+          <svg class="navbar__theme-icon navbar__theme-icon--moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+      </div>
+
+      <button 
+        class="navbar__toggle" 
+        id="navToggle" 
+        aria-label="Toggle menu" 
+        aria-expanded="false" 
+        aria-controls="primary-nav" 
+        type="button">
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!--  HERO  -->
+    <section class="hero" id="hero">
+      <div class="hero__inner">
+        <h1 class="hero__title">
+          <span data-content="hero.titleLine1">Stop stitching tools together.</span><br>
+          <span data-content="hero.titleLine2Pre">Let the work</span> <span class="hero__title-accent" data-content="hero.titleAccent">flow</span> <span data-content="hero.titleLine2Post">on its own.</span>
+        </h1>
+        <p class="hero__subtitle" data-content="hero.subtitle">
+          Prodesk IT connects your team's apps into a single automated pipeline -
+          so status updates, handoffs, and approvals happen without anyone
+          copy-pasting between tabs.
+        </p>
+        <div class="hero__actions">
+          <a href="#contact" class="btn btn--primary btn--lg" data-content="hero.ctaPrimary">Start free to Connect</a>
+          <a href="#features" class="btn btn--ghost btn--lg" data-content="hero.ctaSecondary">See Services</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features" id="features">
+      <div class="features__header">
+        <p class="eyebrow eyebrow--center">
+          <span class="eyebrow__dot" aria-hidden="true"></span>
+          <span data-content="features.eyebrow">Services</span>
+        </p>
+        <h2 class="features__title" data-content="features.title">Our Specialized Services</h2>
+      </div>
+
+      <div class="features__grid">
+        <article class="feature-card">
+          <div class="feature-card__icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h6l2-4 4 8 2-4h4"/></svg>
+          </div>
+          <h3 class="feature-card__title" data-content="features.cards.0.title">Custom Software Development</h3>
+          <p class="feature-card__text" data-content="features.cards.0.text">
+            Tailored software solutions designed to meet your unique business requirements,
+            from web applications to mobile apps and beyond.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-card__icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          </div>
+          <h3 class="feature-card__title" data-content="features.cards.1.title">IT Consulting</h3>
+          <p class="feature-card__text" data-content="features.cards.1.text">
+            Expert guidance and strategic advice to help you navigate the ever-evolving landscape of technology,
+            ensuring your IT infrastructure aligns with your business goals.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-card__icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+          </div>
+          <h3 class="feature-card__title" data-content="features.cards.2.title">Real-time visibility</h3>
+          <p class="feature-card__text" data-content="features.cards.2.text">
+            See exactly where every task sits in the pipeline, with alerts
+            the moment something stalls.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!--  About section  -->
+    <section class="about-section" id="about">
+      <div class="about__header">
+        <p class="eyebrow eyebrow--center"> <span class="eyebrow__dot" aria-hidden="true"></span> About </p>
+        <h2 class="about__title" data-content="about.title">About Prodesk It</h2>
+        <div class="about-content">
+          <div class="about-text">
+            <p data-content="about.text">
+              We don't just write code; we engineer scalable digital ecosystems.
+              Our mission is to transform complex technical ideas into elegant,
+              high-performance platforms that drive real business growth for global enterprises.
+              We work alongside our clients as one team with a shared ambition:
+              to achieve extraordinary results, outperform the competition, and
+              redefine industries.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Us  -->
+    <section class="cta" id="contact">
+      <div class="cta__inner">
+        <h2 class="cta__title" data-content="cta.title">Ready to Build Something Amazing?</h2>
+        <p class="cta__text" data-content="cta.text">Partner with Prodesk IT to create high-performance websites,
+          web applications, and digital solutions that drive real business growth.</p>
+        <a href="#" class="btn btn--primary btn--lg" data-content="cta.button">Contact Us</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER  -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <img src="images.png" alt="Prodesk IT Logo" class="navbar__logo-img">
+        <span data-content="brand.name">Prodesk IT</span>
+      </div>
+      <p class="footer__copy" data-content="footer.copyright">© 2026 Prodesk it, Inc. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
