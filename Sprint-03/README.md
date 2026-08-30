@@ -261,47 +261,7 @@ Requires a browser with support for: `fetch`, `AbortController`, `Worker`,
 `async`/`await`, `Promise`, and `performance.now()` — i.e., any current
 version of Chrome, Firefox, Safari, or Edge. No polyfills are included or
 required.
- 
-## 17. Requirement Audit
- 
-**Phase 1 — Asynchronous Integration**
-- [x] `fetch()` used (`js/api.js`)
-- [x] `async`/`await` used throughout
-- [x] `try`/`catch` around every request path
-- [x] API layer separated from UI (`api.js` vs `ui.js`/`app.js`)
-- [x] HTTP errors handled (`ApiError` type `"http"`)
-- [x] Network errors handled (`ApiError` type `"network"`)
-- [x] "Service Unavailable" UI implemented
-- [x] Retry re-runs the request without a page refresh
-**Phase 2 — Latency Mitigation & Timeout**
-- [x] Skeleton loader shown immediately on request start
-- [x] Skeleton disappears on success, error, or timeout
-- [x] `AbortController` implemented in `timeoutAwareFetch`
-- [x] Timeout is exactly 5000ms (`TIMEOUT_MS` constant)
-- [x] Timeout genuinely aborts the in-flight request
-- [x] Dedicated "Request Timed Out" UI
-- [x] Retry available on the timeout state
-- [x] Timeout timer cleared in a `finally` block on every path
-**Phase 3 — Web Workers**
-- [x] Dedicated `js/worker.js` file
-- [x] Worker is actually instantiated and used, not just defined
-- [x] `postMessage()` used from the main thread (`PROCESS_DATA`)
-- [x] Worker parses/expands the payload
-- [x] Worker filters records
-- [x] Worker sorts records
-- [x] Worker calculates statistics
-- [x] Worker returns results via `postMessage()` (`PROCESS_SUCCESS`)
-- [x] Worker errors handled and reported (`PROCESS_ERROR`, `onerror`)
-- [x] Main thread performs no heavy filtering/sorting/statistics itself
-- [x] Large dataset demonstration (10,000–50,000 records, configurable)
-- [x] Processing time displayed via `performance.now()`
-- [x] Worker status displayed (`Idle` / `Processing` / `Completed` / `Error`)
-**Deployment**
-- [x] Static-deployment compatible
-- [x] No build step required
-- [x] All file paths are relative and survive deployment at any path
-- [x] No `localhost`-only dependencies
-- [x] No CORS workaround — the public API already permits cross-origin calls
+
  
 
 
