@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Infrastructure Pipeline </title>
+   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="app-header__brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M4 12h4l2-7 4 14 2-7h4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <div class="brand-text">
+        <h1>API Infrastructure Pipeline</h1>
+        <p class="eyebrow">Prodesk IT &middot; Sprint 03</p>
+      </div>
+    </div>
+
+    <div class="app-header__status" role="status" aria-live="polite">
+      <span class="status-dot" id="global-status-dot" data-state="idle" aria-hidden="true"></span>
+      <span id="global-status-text">Awaiting first request</span>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="pipeline-strip" aria-label="Request pipeline progress">
+      <ol class="pipeline-track" id="pipeline-track">
+        <li class="pipeline-node" data-stage="request" data-state="pending">
+          <span class="pipeline-node__index">01</span>
+          <span class="pipeline-node__label">Fetch Request</span>
+          <span class="pipeline-node__sub">api.js</span>
+        </li>
+        <li class="pipeline-connector" aria-hidden="true"></li>
+        <li class="pipeline-node" data-stage="guard" data-state="pending">
+          <span class="pipeline-node__index">02</span>
+          <span class="pipeline-node__label">Timeout Guard</span>
+          <span class="pipeline-node__sub">5000ms ceiling</span>
+        </li>
+        <li class="pipeline-connector" aria-hidden="true"></li>
+        <li class="pipeline-node" data-stage="expand" data-state="pending">
+          <span class="pipeline-node__index">03</span>
+          <span class="pipeline-node__label">Dataset Expansion</span>
+          <span class="pipeline-node__sub">client-side</span>
+        </li>
+        <li class="pipeline-connector" aria-hidden="true"></li>
+        <li class="pipeline-node" data-stage="worker" data-state="pending">
+          <span class="pipeline-node__index">04</span>
+          <span class="pipeline-node__label">Worker Compute</span>
+          <span class="pipeline-node__sub">worker.js</span>
+        </li>
+        <li class="pipeline-connector" aria-hidden="true"></li>
+        <li class="pipeline-node" data-stage="render" data-state="pending">
+          <span class="pipeline-node__index">05</span>
+          <span class="pipeline-node__label">Render</span>
+          <span class="pipeline-node__sub">ui.js</span>
+        </li>
+      </ol>
+    </section>
+
+    <section class="kpi-grid" aria-label="Key metrics">
+      <div class="kpi-card">
+        <span class="kpi-card__label">API Status</span>
+        <span class="kpi-card__value" id="kpi-api-status">—</span>
+        <span class="kpi-card__hint" id="kpi-api-hint">Not yet requested</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-card__label">Records Loaded</span>
+        <span class="kpi-card__value" id="kpi-records-loaded">0</span>
+        <span class="kpi-card__hint">from remote endpoint</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-card__label">Records Processed</span>
+        <span class="kpi-card__value" id="kpi-records-processed">0</span>
+        <span class="kpi-card__hint">by Web Worker</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-card__label">Processing Time</span>
+        <span class="kpi-card__value" id="kpi-processing-time">—</span>
+        <span class="kpi-card__hint">worker thread only</span>
+      </div>
+    </section>
+
+    <div class="panel-grid">
+
+      <section class="panel" aria-labelledby="api-panel-heading">
+        <div class="panel__header">
+          <h2 id="api-panel-heading">API Request</h2>
+          <span class="pill" id="api-request-pill" data-state="idle">Idle</span>
+        </div>
+
+        <dl class="kv-list">
+          <div class="kv-list__row">
+            <dt>Endpoint</dt>
+            <dd id="api-endpoint-value">https://jsonplaceholder.typicode.com/users</dd>
+          </div>
+          <div class="kv-list__row">
+            <dt>Timeout ceiling</dt>
+            <dd>5000&nbsp;ms</dd>
+          </div>
+        </dl>
+
+        <div id="api-panel-body" aria-live="polite">
+          <p class="empty-hint">Choose &ldquo;Load API Data&rdquo; below to begin.</p>
+        </div>
+      </section>
+ 
+      <section class="panel" aria-labelledby="worker-panel-heading">
+        <div class="panel__header">
+          <h2 id="worker-panel-heading">Web Worker Processing</h2>
+          <span class="pill" id="worker-status-pill" data-state="idle">Idle</span>
+        </div>
+
+        <dl class="kv-list">
+          <div class="kv-list__row">
+            <dt>Worker file</dt>
+            <dd>js/worker.js</dd>
+          </div>
+          <div class="kv-list__row">
+            <dt>Records processed</dt>
+            <dd id="worker-records-value">0</dd>
+          </div>
+          <div class="kv-list__row">
+            <dt>Processing duration</dt>
+            <dd id="worker-duration-value">—</dd>
+          </div>
+        </dl>
+
+        <div id="worker-panel-body" aria-live="polite">
+          <p class="empty-hint">The Worker starts automatically once API data loads.</p>
+        </div>
+
+        <div class="progress-track" role="progressbar" aria-label="Worker processing progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="worker-progress">
+          <div class="progress-track__fill" id="worker-progress-fill"></div>
+        </div>
+      </section>
+    </div>
+
+ 
+    <section class="panel panel--table" aria-labelledby="table-panel-heading">
+      <div class="panel__header">
+        <h2 id="table-panel-heading">Processed Records</h2>
+        <span class="table-count" id="table-count">0 rows</span>
+      </div>
+
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Username</th>
+              <th scope="col">Email</th>
+              <th scope="col">Company</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody id="data-table-body">
+            <tr class="table-empty-row">
+              <td colspan="6">No records yet. Load API data to populate this table.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+ 
+    <section class="demo-panel" aria-labelledby="demo-panel-heading">
+      <div class="demo-panel__header">
+        <h2 id="demo-panel-heading">Pipeline Test Controls</h2>
+        <p>Exercise each mandatory pathway on demand.</p>
+      </div>
+      <div class="demo-panel__controls">
+        <button type="button" class="btn btn--primary" id="btn-load-data">Load API Data</button>
+        <button type="button" class="btn btn--secondary" id="btn-process-large" disabled>Process Large Dataset</button>
+        <button type="button" class="btn btn--ghost" id="btn-simulate-error">Simulate API Error</button>
+        <button type="button" class="btn btn--ghost" id="btn-simulate-timeout">Simulate Timeout</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <p>Sprint 03 &middot; Static deployment, no build step &middot; Vanilla HTML / CSS / JS</p>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
