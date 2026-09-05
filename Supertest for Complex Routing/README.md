@@ -25,17 +25,27 @@ https://prodesk-it.onrender.com/
 ```
 project/
 ├── client/                  # React frontend
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── vite.config.js
 │   └── src/
 │       ├── components/      # TopBar, RecordForm, RecordTable, LoadingSpinner, EmptyMessage
 │       ├── pages/            # Home.jsx
 │       ├── services/         # supertestApi.js (fetch wrapper)
-│       └── styles/           # global.css, dashboard.css, form.css, table.css
+│       ├── styles/           # global.css, dashboard.css, form.css, table.css
+│       └── App.jsx
+│       ├── main.jsx
 ├── server/                  # Express backend
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── server.js
 │   ├── routes/               # records.js
 │   ├── controllers/          # recordController.js
 │   ├── middleware/           # validateRecord.js
 │   ├── utils/                 # sanitizeText.js
 │   └── data/                  # recordsStore.js (in-memory array)
+└── TESTING.md
 └── README.md
 ```
 
