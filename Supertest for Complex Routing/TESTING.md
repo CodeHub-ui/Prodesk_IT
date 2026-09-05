@@ -1,15 +1,40 @@
-# Testing Report — Digital Supertest System
+# Testing Report — Digital Supertest System(Supertest for Complex Routing)
+
+# Testing Report — Supertest for Complex Routing
 
 This document shows how the Digital Supertest project was run and tested
 end-to-end (frontend + backend), along with the results observed.
 
-## 1. Environment Used
+## 1. Live Deployment
 
-- **Platform:** CodeSandbox Devbox (cloud development environment)
+- **Live URL:** [https://prodesk-it.onrender.com](https://prodesk-it.onrender.com)
+- **Hosting Platform:** Render (free tier, single Web Service)
+- **Architecture:** The Express backend serves both the `/api/records` API
+  and the built React frontend (`client/dist`) from the same service, so
+  the entire app runs on one domain with no separate frontend/backend URLs.
+- **Source Code:** Hosted on GitHub in the `Prodesk_IT` repository, inside
+  the `Supertest for Complex Routing` folder.
+
+| Test Case | Steps | Result |
+|-----------|-------|--------|
+| Live site loads | Opened the Render URL in browser | App (TopBar, form, table) loaded successfully | ✅ Passed |
+| Live record creation | Filled form and submitted on live site | Record saved and displayed instantly in table | ✅ Passed |
+| Live API reachable | Opened `/api/health` on the live URL | Returned `{"status":"ok"}` | ✅ Passed |
+
+> Note: Render's free tier spins the service down after a period of
+> inactivity, so the very first request after idle time can take
+> 10–30 seconds to respond while the server wakes up. This is expected
+> behavior on the free plan, not a bug.
+
+## 2. Environment Used
+
+- **Development Platform:** VS Code
+- **Deployment Platform:** Render (Web Service, free tier)
 - **Backend:** Node.js + Express, run with `npm start` inside `server/`
 - **Frontend:** React 19 + Vite, run with `npm run dev` inside `client/`
+  during development, and built with `npm run build` for production
 
-## 2. How the Project Was Run
+## 3. How the Project Was Run (Local/Development)
 
 | Step | Command | Folder | Result |
 |------|---------|--------|--------|
@@ -19,7 +44,18 @@ end-to-end (frontend + backend), along with the results observed.
 | 4 | `npm run dev` | `client/` | Vite dev server started on port `5173` |
 | 5 | Opened preview URL in browser | — | App loaded successfully |
 
-## 3. Backend API Testing
+## 4. How the Project Was Deployed (Production)
+
+| Step | Action | Result |
+|------|--------|--------|
+| 1 | Pushed project to GitHub (`Prodesk_IT` repo) | Source code available on GitHub |
+| 2 | Created a new Web Service on Render, connected to the GitHub repo | Repo linked to Render |
+| 3 | Set Root Directory to `Supertest for Complex Routing` | Render scoped the build to the correct subfolder |
+| 4 | Set Build Command: `cd client && npm install && npm run build && cd ../server && npm install` | Frontend built, backend dependencies installed |
+| 5 | Set Start Command: `cd server && npm start` | Server started and began serving both API and frontend |
+| 6 | Render deploy completed | "Your service is live" at `https://prodesk-it.onrender.com` |
+
+## 5. Backend API Testing
 
 | Test Case | Endpoint | Input | Expected Result | Actual Result |
 |-----------|----------|-------|------------------|----------------|
@@ -30,7 +66,7 @@ end-to-end (frontend + backend), along with the results observed.
 | Invalid test score | `POST /api/records` | `testScore: 150` | 400, "must be between 0 and 100" | ✅ Passed |
 | XSS input | `POST /api/records` | `<script>alert(1)</script>` in name | Stored as escaped text (`&lt;script&gt;...`) | ✅ Passed |
 
-## 4. Frontend Feature Testing
+## 6. Frontend Feature Testing
 
 | Feature | How Tested | Result |
 |---------|-----------|--------|
@@ -44,38 +80,21 @@ end-to-end (frontend + backend), along with the results observed.
 | Accessibility | Tabbed through form using keyboard only | All fields reachable, focus outline visible | ✅ Passed |
 | Responsive layout | Resized browser window to mobile width | Table switched to stacked card layout | ✅ Passed |
 
-## 5. Screenshots
+## 7. Known Limitations  
 
-> Add your screenshots below by uploading them to a `screenshots/` folder
-> in this repo, then linking them here (see instructions after this file).
-
-**Server running successfully:**
-`![Server running](./screenshots/server-running.png)`
-
-**Empty state (no records yet):**
-`![Empty state](./screenshots/empty-state.png)`
-
-**Form validation errors:**
-`![Validation errors](./screenshots/validation-errors.png)`
-
-**Record created and shown in table:**
-`![Record created](./screenshots/record-created.png)`
-
-**Search working:**
-`![Search](./screenshots/search-working.png)`
-
-## 6. Known Limitations (By Design)
-
-- Data is stored **in-memory only** — restarting the server clears all
-  records, since this project uses no database (per project requirements).
+- Data is stored **in-memory only** — (per project requirements).
 - No authentication/login system yet.
 - No automated unit tests included — all testing above was performed
-  manually against the running application.
+  manually against the running application, both locally and on the
+  live deployment.
+- Render's free tier has a cold-start delay after inactivity.
 
-## 7. Conclusion
+## 8. Conclusion
 
 All required features from the Technical Requirements Document (empty
 state, slow-network handling, input validation, XSS sanitization,
 accessibility, search, and analytics logging) were manually tested and
-confirmed working end-to-end, with the React frontend successfully
-communicating with the Express backend via the `/api/records` API.
+confirmed working end-to-end, both in local development and on the live
+production deployment at **https://prodesk-it.onrender.com**, with the
+React frontend successfully communicating with the Express backend via
+the `/api/records` API.
