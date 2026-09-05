@@ -82,44 +82,15 @@ Open **http://localhost:5173** in your browser to use the app.
 
 ```json
 {
-  "employeeName": "Jane Doe",
-  "employeeId": "EMP-1024",
-  "department": "Manufacturing",
-  "testScore": 87,
-  "remarks": "Retest not required"
+  "employeeName": "Harshit Gupta",
+  "employeeId": "Harshit-96",
+  "department": "IT",
+  "testScore": 100,
+  "remarks": "No remark"
 }
 ```
 
 `employeeName`, `employeeId`, and `department` are required. `testScore` must
 be between 0 and 100 if provided. `remarks` is optional.
 
-## Key Behaviors Implemented
-
-- **Empty state** — shows "No Data Found / Create your first Supertest
-  record" when there are no records (or no search matches).
-- **Loading & slow-network handling** — a spinner is shown while records
-  load or a record is being submitted; the submit button is disabled during
-  submission to prevent duplicate requests.
-- **Client + server validation** — required fields and test score range are
-  checked both in the browser (`RecordForm.jsx`) and on the server
-  (`middleware/validateRecord.js`). Invalid fields get a red border and an
-  error message underneath.
-- **XSS protection** — all text fields are escaped via
-  `server/utils/sanitizeText.js` before being stored.
-- **Accessibility** — every input has an associated `<label>`, the search
-  box and buttons have `aria-label`s, and there's a visible focus outline on
-  all interactive elements for keyboard users.
-- **Search** — filters the records table client-side by name, ID, or
-  department as you type.
-- **Analytics simulation** — logs `[Analytics] User interacted with
-  Supertest` to the console after every successful record creation.
-
-## Notes / Known Limitations (by design, for this stage)
-
-- Data is stored **in memory only** — restarting the server clears all
-  records. A real database (e.g. PostgreSQL, MongoDB) would replace
-  `server/data/recordsStore.js` in a future iteration.
-- There's no authentication yet — anyone with access to the app can create
-  records. Role-based access (floor staff vs. managers) is a planned
-  follow-up.
-- No automated tests are included in this walking-skeleton pass.
+ 
